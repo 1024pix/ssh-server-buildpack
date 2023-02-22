@@ -1,0 +1,18 @@
+# Disable root ssh access
+PermitRootLogin no
+
+# Disable password login
+PasswordAuthentication no
+AuthenticationMethods publickey,keyboard-interactive:pam
+
+# Configure idle time logout
+ClientAliveInterval <value in seconds>
+
+# Explicitly Allow SSH users
+AllowUsers <user names>
+
+# Authentication:
+AuthorizedKeysFile      .ssh/authorized_keys
+
+# override default of no subsystems
+Subsystem       sftp    /tmp/cache/openssh/build/libexec/sftp-server

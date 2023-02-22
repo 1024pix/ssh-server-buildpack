@@ -1,0 +1,23 @@
+#!/usr/bin/bash
+
+basedir="$(cd -P "$(dirname "$0")" && pwd)"
+BUILD_DIR=${1:-}
+CACHE_DIR=${2:-}
+
+OPENSSH_VERSION="9.2p1"
+
+mkdir -p "$CACHE_DIR" "$CACHE_DIR/openssh/"
+
+download_url="https://ftp.fr.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${OPENSSH_VERSION}.tar.gz"
+curl $download_url -s -o - | tar -xz -C "$CACHE_DIR"
+
+cd $CACHE_DIR/openssh-${OPENSSH_VERSION}
+
+./configure --prefix="$CACHE_DIR/openssh/build" --with-privsep-path="$CACHE_DIR/openssh/empty/" --quiet
+
+make --quiet && make install --quiet
+
+mkdir -p "$BUILD_DIR"/vendor/openssh/
+cp -R "$CACHE_DIR"/openssh/build/* "$BUILD_DIR"/vendor/openssh/
+cp -f "$basedir"/../config/sshd_config "$BUILD_DIR"/vendor/openssh/etc/sshd_config
+cp -f "$basedir"/../start-ssh-server.sh "$BUILD_DIR"/vendor/openssh/

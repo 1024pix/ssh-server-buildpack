@@ -20,4 +20,4 @@ make --quiet && make install --quiet
 mkdir -p "$BUILD_DIR"/vendor/openssh/
 cp -R "$CACHE_DIR"/openssh/build/* "$BUILD_DIR"/vendor/openssh/
 cp -f "$basedir"/../config/sshd_config "$BUILD_DIR"/vendor/openssh/etc/sshd_config
-cp -f "$basedir"/../start-ssh-server.sh "$BUILD_DIR"/vendor/openssh/
+cp -f "$basedir"/../start-ssh-server.sh "$BUILD_DIR"/bin

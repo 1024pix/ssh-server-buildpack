@@ -1,5 +1,8 @@
 # ssh-server-buildpack
+
 ## Build 
+
+```sh
 export BUILD_DIR=$(mktemp -d)
 
 docker run --pull always \                                            
@@ -9,6 +12,8 @@ docker run --pull always \
  scalingo/scalingo-20:latest bash
 
 /buildpack/bin/compile /build /tmp/cache /tmp/env
+```
+
 
 ## Usage 
 Start ssh in foreground on the procfile : 

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+echo "SSH Config"
+exit 0

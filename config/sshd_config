@@ -1,0 +1,32 @@
+# Disable root ssh access
+PermitRootLogin no
+
+# Disable password login
+PasswordAuthentication no
+AuthenticationMethods publickey
+
+AllowUsers appsdeck
+# Configure idle time logout
+ClientAliveInterval 60
+
+# Authentication:
+AuthorizedKeysFile       /app/config/.ssh/authorized_keys
+
+# override default of no subsystems
+Subsystem       sftp    /tmp/cache/openssh/build/libexec/sftp-server
+
+
+# Hostkeys
+HostKey /app/etc/ssh/ssh_host_dsa_key
+HostKey /app/etc/ssh/ssh_host_ecdsa_key
+HostKey /app/etc/ssh/ssh_host_ed25519_key
+HostKey /app/etc/ssh/ssh_host_rsa_key
+
+# LogLevel
+
+LogLevel INFO
+
+
+PubkeyAcceptedKeyTypes ecdsa-sha2-nistp256,ssh-ed25519,rsa-sha2-512,rsa-sha2-256
+
+PidFile /app/config/sshd.pid
